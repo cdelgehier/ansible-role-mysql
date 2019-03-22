@@ -18,6 +18,11 @@
     - question: select-server
       value: "mysql-{{ mysql_upstream_version }}"
 
+- lineinfile:
+    path: /etc/apt/apt.conf.d/99mysql
+    line: 'APT::Get::AllowUnauthenticated "true";'
+    create: yes
+    
 - name: ensure mysql upstream repository is installed
   apt:
     deb: /root/mysql-apt-config.deb
