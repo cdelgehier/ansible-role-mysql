@@ -4,6 +4,11 @@
     url: http://dev.mysql.com/get/mysql-apt-config_0.8.6-1_all.deb
     dest: /root/mysql-apt-config.deb
 
+- name: Add an apt key by id from a keyserver
+  apt_key:
+    keyserver: keys.gnupg.net
+    id: 8C718D3B5072E1F5
+
 - name: ensure mysql upstream repository package is configured
   debconf:
     name: mysql-apt-config
@@ -18,10 +23,10 @@
     - question: select-server
       value: "mysql-{{ mysql_upstream_version }}"
 
-- lineinfile:
-    path: /etc/apt/apt.conf.d/99mysql
-    line: 'APT::Get::AllowUnauthenticated "true";'
-    create: yes
+#- lineinfile:
+#    path: /etc/apt/apt.conf.d/99mysql
+#    line: 'APT::Get::AllowUnauthenticated "true";'
+#    create: yes
     
 - name: ensure mysql upstream repository is installed
   apt:
