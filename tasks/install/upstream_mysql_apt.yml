@@ -37,4 +37,4 @@
   apt:
     update_cache: yes
   changed_when: false
-  when: mysql_upstream_repository_installation|changed
+  when: mysql_upstream_repository_installation is changed
